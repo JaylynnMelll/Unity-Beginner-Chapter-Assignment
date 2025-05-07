@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/2DTopDownShooting.unity
+    guid: 73a1d484f639ff74fadbf98a2753b0a9
   m_configObjects: {}
