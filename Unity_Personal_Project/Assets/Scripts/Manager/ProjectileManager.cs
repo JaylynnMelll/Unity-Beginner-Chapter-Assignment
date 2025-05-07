@@ -25,6 +25,9 @@ public class ProjectileManager : MonoBehaviour
 
     public void CreateImpactParticlesAtPostion(Vector3 position, RangeWeaponHandler weaponHandler)
     {
+        if (impactParticleSystem == null || !impactParticleSystem.gameObject.activeInHierarchy)
+            return;
+
         impactParticleSystem.transform.position = position;
         ParticleSystem.EmissionModule em = impactParticleSystem.emission;
         em.SetBurst(0, new ParticleSystem.Burst(0, Mathf.Ceil(weaponHandler.BulletSize * 5)));

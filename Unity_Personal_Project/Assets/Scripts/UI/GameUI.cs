@@ -11,6 +11,8 @@ public class GameUI : BaseUI
     [SerializeField] public TextMeshProUGUI scoreText;
     [SerializeField] public Slider hpSlider;
 
+    private bool isFirst = true;
+
     private void Start()
     {
         UpdateHPSlider(1);

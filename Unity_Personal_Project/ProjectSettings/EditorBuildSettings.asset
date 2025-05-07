@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/2DTopDownShooting.unity
     guid: 73a1d484f639ff74fadbf98a2753b0a9
+  - enabled: 1
+    path: Assets/Scenes/Basement.unity
+    guid: d36989a45dcc212499ac43a10773492e
   m_configObjects: {}

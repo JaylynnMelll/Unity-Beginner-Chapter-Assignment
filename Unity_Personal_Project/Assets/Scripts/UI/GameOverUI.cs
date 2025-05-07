@@ -9,6 +9,7 @@ public class GameOverUI : BaseUI
 {
     [SerializeField] private Button restartButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private TotalPointsUI totalPointsUI;
 
     public override void Init(UIManager uiManager)
     {
@@ -25,6 +26,7 @@ public class GameOverUI : BaseUI
     public void OnClickExitButton()
     {
         SceneManager.LoadScene("SampleScene");
+        totalPointsUI.SaveScore();
     }
 
     protected override UIState GetUIState()

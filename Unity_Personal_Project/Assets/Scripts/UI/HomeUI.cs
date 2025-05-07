@@ -8,6 +8,8 @@ public class HomeUI : BaseUI
 {
     [SerializeField] private Button startButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private TotalPointsUI totalPointsUI;
+    private bool isFirstLoading = true;
 
     public override void Init(UIManager uiManager)
     {
@@ -24,6 +26,8 @@ public class HomeUI : BaseUI
     public void OnClickExitButton()
     {
         SceneManager.LoadScene("SampleScene");
+        totalPointsUI.SaveScore();
+        isFirstLoading = false;
     }
 
     protected override UIState GetUIState()

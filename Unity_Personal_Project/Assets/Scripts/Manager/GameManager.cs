@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,22 +17,22 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
 
     public static bool isFirstLoading = true;
-    private int score = 0;
+    public int score = 0;
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject); 
+            return;
+        }
+
         instance = this;
-        player = FindObjectOfType<PlayerController>();
-        player.Init(this);
+        DontDestroyOnLoad(this.gameObject);
 
-        uiManager = FindObjectOfType<UIManager>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
-        _playerResourceController = player.GetComponent<ResourceController>();
-        _playerResourceController.RemoveHealthChangeEvent(uiManager.ChangePlayerHP);
-        _playerResourceController.AddHealthChangeEvent(uiManager.ChangePlayerHP);
-
-        enemyManager = GetComponentInChildren<EnemyManager>();
-        enemyManager.Init(this);
+        InitializeSceneReferences();
     }
 
     private void Start()
@@ -74,5 +75,30 @@ public class GameManager : MonoBehaviour
     {
         enemyManager.StopWave();
         uiManager.SetGameOver();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitializeSceneReferences();
+    }
+
+    private void InitializeSceneReferences()
+    {
+        player = FindObjectOfType<PlayerController>();
+        player.Init(this);
+
+        uiManager = FindObjectOfType<UIManager>();
+
+        _playerResourceController = player.GetComponent<ResourceController>();
+        _playerResourceController.RemoveHealthChangeEvent(uiManager.ChangePlayerHP);
+        _playerResourceController.AddHealthChangeEvent(uiManager.ChangePlayerHP);
+
+        enemyManager = GetComponentInChildren<EnemyManager>();
+        enemyManager.Init(this);
     }
 }
